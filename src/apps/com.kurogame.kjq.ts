@@ -24,16 +24,22 @@ export default defineGkdApp({
       actionMaximum: 1, // 整个规则组最多执行一次
       resetMatch: 'app', // 重新进入应用时重置次数
       rules: [
-        // 步骤1：点击“签到奖励”入口
+        // 步骤1：点击签到按钮
         {
-          matches: '[text="签到奖励"] < View[clickable=true]',
-          snapshotUrls: ['https://i.gkd.li/i/你的快照ID'],
+          matches: '[id="com.kurogame.kjvcq:id/sign_click"]',
         },
-        // 步骤2：点击“领”字所在卡片
+        // 步骤2：关闭弹窗
+        {
+          matches: '[id="com.kurogame.kjq:id/bt_close"]',
+        },
+        // 步骤3：点击 ll_wiki_tab（进入签到奖励页）
+        {
+          matches: '@FrameLayout <3 [vid="ll_wiki_tab"]',
+        },
+        // 步骤4：点击“领”字所在卡片
         {
           matches:
             '@View[clickable=true] > TextView[text^="第"] + TextView[width<100]',
-          snapshotUrls: ['https://i.gkd.li/i/你的有效快照ID'],
         },
       ],
     },
